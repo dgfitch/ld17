@@ -17,7 +17,7 @@ public class TitleScene extends Scene2D {
     @Override
     public void load() {
         
-        Label title = new Label(CoreFont.load("hello.font.png"), "Hello World", 320, 240);
+        Label title = new Label(CoreFont.load("hello.font.png"), "Ludum Dare 17", 320, 240);
         title.setAnchor(0.5, 0.5);
         playButton = Button.createLabeledButton("Play", 320, 320);
         playButton.setAnchor(0.5, 0.5);
@@ -40,9 +40,9 @@ public class TitleScene extends Scene2D {
             Stage.pushScene(new OptionScene());
         }
         else if (playButton.isClicked()) {
-            // Animated alternative to Stage.setScene(new HelloWorld());
-            componentLayer.alpha.animateTo(0, 300);
-            addEvent(new SceneChangeEvent(new HelloWorld(), 300));
+            // Animated alternative to Stage.setScene(new LD17());
+            componentLayer.alpha.animateTo(0, 500);
+            addEvent(new SceneChangeEvent(new LD17(), 300));
         }
     }
 }

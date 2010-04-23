@@ -7,7 +7,7 @@ import pulpcore.sprite.ImageSprite;
 import pulpcore.sprite.Label;
 import pulpcore.sprite.Sprite;
 
-public class HelloWorld extends Scene2D {
+public class LD17 extends Scene2D {
     
     Label label;
     
@@ -16,7 +16,7 @@ public class HelloWorld extends Scene2D {
         add(new ImageSprite("background.png", 0, 0));
         
         CoreFont font = CoreFont.load("hello.font.png");
-        label = new Label(font, "Hello World", 320, 240);
+        label = new Label(font, "Ludum Dare 17", 320, 240);
         label.setAnchor(0.5, 0.5);
         add(label);
         

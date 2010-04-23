@@ -7,7 +7,7 @@ public class LoadingScene extends pulpcore.scene.LoadingScene {
     public LoadingScene() {
         super("LD17-" + ProjectBuild.VERSION + ".zip" , new TitleScene());
         
-        CoreSystem.setTalkBackField("app.name", "HelloWorld");
+        CoreSystem.setTalkBackField("app.name", "LD17");
         CoreSystem.setTalkBackField("app.version", ProjectBuild.VERSION);
         
         Stage.setUncaughtExceptionScene(new UncaughtExceptionScene());

@@ -50,7 +50,7 @@
     -->
     <property name="pulpcore.player.wait" value="true" />
     <property name="include.src" value="false" />
-    <property name="project.scene" value="HelloWorld" />
+    <property name="project.scene" value="LD17" />
     <property name="project.jar" value="${project.scene}.jar" />
     <property name="project.assets.zip" value="${project.scene}.zip" />
     <property name="project.width" value="640" />
