@@ -226,6 +226,7 @@
                 target="${pulpcore.java.language}"
                 debug="on"
                 deprecation="on"
+                includeantruntime="false"
                 bootclasspath="${bootclasspath}">
 
             <include name="**/*.java"/>
