@@ -10,21 +10,23 @@ import pulpcore.sprite.FilledSprite;
 
 public class LD17 extends Scene2D {
     
-    Label label;
     Label theme;
+    ImageSprite tam;
     
     @Override
     public void load() {
         add(new ImageSprite("background.png", 0, 0));
 
-        add(new ImageSprite("craptest.png", 0, 0));
+        add(new ImageSprite("tile_grass_1.png", 0, 0));
+        add(new ImageSprite("tile_grass_1.png", 64, 0));
+        add(new ImageSprite("tile_grass_1.png", 0, 64));
+        add(new ImageSprite("tile_grass_1.png", 64, 64));
+
+        tam = new ImageSprite("tam.png", 0, 0);
+        add(tam);
         
         CoreFont font = CoreFont.load("hello.font.png");
-        label = new Label(font, "Ludum Dare 17", 320, 240);
-        label.setAnchor(0.5, 0.5);
-        add(label);
-
-        theme = new Label(font, "ISLANDS", 320, 140);
+        theme = new Label(font, "HOORAY!!", 320, 50);
         theme.setAnchor(0.5, 0.5);
         add(theme);
         
@@ -35,8 +37,9 @@ public class LD17 extends Scene2D {
     
     @Override
     public void update(int elapsedTime) {
-        double angle = 0.006 * (Input.getMouseX() - 320);
-        int duration = 100;
-        label.angle.animateTo(angle, duration);
+        theme.y.animateTo(640 - Input.getMouseY(), 1000);
+
+        tam.x.animateTo(Input.getMouseX() - 320, 300);
+        tam.y.animateTo(Input.getMouseY() - 240, 300);
     }
 }
