@@ -16,6 +16,7 @@ public class LD17 extends Scene2D {
     Label theme;
     ImageSprite tam;
     ImageSprite cursor;
+    ImageSprite cursorCone;
     Group maskLayer;
     Group itemLayer;
     Group backLayer;
@@ -25,11 +26,14 @@ public class LD17 extends Scene2D {
         setCursor(Input.CURSOR_OFF);
         cursor = new ImageSprite("light_glow_1.png", 0, 0);
         cursor.setAnchor(0.5, 0.5);
-        cursor.visible.set(false);
+        //cursor.visible.set(false);
+        cursorCone = new ImageSprite("light_cone_1.png", 0, 0);
+        cursorCone.setAnchor(0.5, 1.0);
 
         maskLayer = new Group();
         maskLayer.add(new FilledSprite(gray(18)));
         maskLayer.add(cursor);
+        maskLayer.add(cursorCone);
         maskLayer.setBlendMode(BlendMode.Multiply());
         maskLayer.createBackBuffer();
 
@@ -62,7 +66,9 @@ public class LD17 extends Scene2D {
     @Override
     public void update(int elapsedTime) {
         cursor.setLocation(Input.getMouseX(), Input.getMouseY());
-        cursor.visible.set(Input.isMouseInside());
+        cursorCone.setLocation(tam.x, tam.y);
+
+        //cursor.visible.set(Input.isMouseInside());
 
         theme.y.animateTo(640 - Input.getMouseY(), 1000);
 

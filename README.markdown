@@ -11,6 +11,8 @@
 
 20100424 16:39:19 - Wow, the compositing and blending stuff in Pulpcore is pretty awesome. 10 minutes and the first "flashlight" or "helicopter spotlight" fx are working.
 
+20100424 16:44:07 - Crap, I don't know how to mask layers with Inkscape. Might be harder to do the cones if I can't get alpha masks.
+
 
 ## Vim notes
 
