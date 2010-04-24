@@ -13,6 +13,14 @@
 
 20100424 16:44:07 - Crap, I don't know how to mask layers with Inkscape. Might be harder to do the cones if I can't get alpha masks.
 
+20100424 17:28:37 - Got the Inkscape mask working but the Pulpcore export doesn't use it. Flashlight fx are mostly functioning, just need a working png for fading the flashlight cone into the circle spot.
+
+20100424 17:32:33 - Man, this NOT turning out very object oriented. My lack of Java-touching is hurting.
+
+
+## TODO
+
+Possibly make heli shadow visible, with spinning neat blade alpha?
 
 ## Vim notes
 

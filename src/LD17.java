@@ -19,10 +19,14 @@ public class LD17 extends Scene2D {
     ImageSprite cursor;
     ImageSprite cursorCone;
     Group maskLayer;
+    Group flashlightLayer;
+    Group helilightLayer;
     Group itemLayer;
     Group backLayer;
     
     double playerSpeed = 2.0;
+    boolean flashlightOn = true;
+    double flashlightPower = 100.0;
 
     @Override
     public void load() {
@@ -35,8 +39,10 @@ public class LD17 extends Scene2D {
 
         maskLayer = new Group();
         maskLayer.add(new FilledSprite(gray(18)));
-        maskLayer.add(cursor);
-        maskLayer.add(cursorCone);
+        flashlightLayer = new Group();
+        flashlightLayer.add(cursor);
+        flashlightLayer.add(cursorCone);
+        maskLayer.add(flashlightLayer);
         maskLayer.setBlendMode(BlendMode.Multiply());
         maskLayer.createBackBuffer();
 
@@ -71,8 +77,12 @@ public class LD17 extends Scene2D {
     
     @Override
     public void update(int elapsedTime) {
-        cursor.setLocation(Input.getMouseX(), Input.getMouseY());
+        if (Input.isMousePressed()) {
+            flashlightOn = !flashlightOn;
+            //if (flashlightOn)
+        }
 
+        cursor.setLocation(Input.getMouseX(), Input.getMouseY());
         //cursor.visible.set(Input.isMouseInside());
 
         theme.y.animateTo(640 - Input.getMouseY(), 1000);
@@ -99,11 +109,9 @@ public class LD17 extends Scene2D {
         cursorCone.scaleTo(cursorCone.width.get(), distance, 0);
 
         if (CoreMath.randChance(5)) {
-          cursorCone.alpha.animateTo(50, 50);
-          cursor.alpha.animateTo(50, 50);
+          flashlightLayer.alpha.animateTo(CoreMath.rand(100), 50);
         } else {
-          cursorCone.alpha.animateTo(255, 100);
-          cursor.alpha.animateTo(255, 100);
+          flashlightLayer.alpha.animateTo(255, CoreMath.rand(50, 200));
         }
     }
 }
