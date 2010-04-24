@@ -23,7 +23,7 @@ public class LoadingScene extends pulpcore.scene.LoadingScene {
         
         // Deter hotlinking
         String[] validHosts = {
-            "pulpgames.net", "www.pulpgames.net", 
+            "mindfill.com", "dan.mindfill.com", 
         };
         if (!Build.DEBUG && !CoreSystem.isValidHost(validHosts)) {
             CoreSystem.showDocument("http://www.pulpgames.net/");

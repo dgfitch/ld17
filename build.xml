@@ -156,6 +156,10 @@
             </condition>
         </fail>            
 
+        <condition property="do.deploy">
+            <equals arg1="${pulpcore.build}" arg2="release" />
+        </condition>
+
         <condition property="do.obfuscate">
             <and>
                 <equals arg1="${pulpcore.build}" arg2="release" />
@@ -369,6 +373,13 @@
             scene="${project.scene}" assets="${autoload.assets.zip}" 
             params="${project.params}"
             waitUntilClosed="${pulpcore.player.wait}" />
+    </target>
+
+    <target name="deploy" description="Push to web" depends="build" if="do.deploy">
+        <exec executable="c:/users/dan/bin/pscp.exe">
+          <arg value="${basedir}/${build}/*" />
+          <arg value="dan@mindfill.com:www/projects/games/ld17" />
+        </exec>
     </target>
     
     
