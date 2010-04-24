@@ -11,6 +11,7 @@ import pulpcore.sprite.FilledSprite;
 public class LD17 extends Scene2D {
     
     Label label;
+    Label theme;
     
     @Override
     public void load() {
@@ -22,6 +23,10 @@ public class LD17 extends Scene2D {
         label = new Label(font, "Ludum Dare 17", 320, 240);
         label.setAnchor(0.5, 0.5);
         add(label);
+
+        theme = new Label(font, "ISLANDS", 320, 140);
+        theme.setAnchor(0.5, 0.5);
+        add(theme);
         
         //// TODO: Not working
         //Sound sound = Sound.load("sound.wav");
