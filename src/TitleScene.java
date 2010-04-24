@@ -40,9 +40,10 @@ public class TitleScene extends Scene2D {
             Stage.pushScene(new OptionScene());
         }
         else if (playButton.isClicked()) {
+            Stage.setScene(new LD17());
             // Animated alternative to Stage.setScene(new LD17());
-            componentLayer.alpha.animateTo(0, 500);
-            addEvent(new SceneChangeEvent(new LD17(), 300));
+            //componentLayer.alpha.animateTo(0, 500);
+            //addEvent(new SceneChangeEvent(new LD17(), 500));
         }
     }
 }

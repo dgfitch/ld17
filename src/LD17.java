@@ -6,6 +6,7 @@ import pulpcore.sound.Sound;
 import pulpcore.sprite.ImageSprite;
 import pulpcore.sprite.Label;
 import pulpcore.sprite.Sprite;
+import pulpcore.sprite.FilledSprite;
 
 public class LD17 extends Scene2D {
     
@@ -14,14 +15,17 @@ public class LD17 extends Scene2D {
     @Override
     public void load() {
         add(new ImageSprite("background.png", 0, 0));
+
+        add(new ImageSprite("craptest.png", 0, 0));
         
         CoreFont font = CoreFont.load("hello.font.png");
         label = new Label(font, "Ludum Dare 17", 320, 240);
         label.setAnchor(0.5, 0.5);
         add(label);
         
-        Sound sound = Sound.load("sound.wav");
-        sound.play();
+        //// TODO: Not working
+        //Sound sound = Sound.load("sound.wav");
+        //sound.play();
     }
     
     @Override
