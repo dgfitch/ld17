@@ -1,4 +1,5 @@
 import pulpcore.CoreSystem;
+import pulpcore.math.CoreMath;
 import pulpcore.image.CoreFont;
 import pulpcore.image.BlendMode;
 import pulpcore.Input;
@@ -14,13 +15,15 @@ import static pulpcore.image.Colors.*;
 public class LD17 extends Scene2D {
     
     Label theme;
-    ImageSprite tam;
+    ImageSprite player;
     ImageSprite cursor;
     ImageSprite cursorCone;
     Group maskLayer;
     Group itemLayer;
     Group backLayer;
     
+    double playerSpeed = 2.0;
+
     @Override
     public void load() {
         setCursor(Input.CURSOR_OFF);
@@ -46,8 +49,11 @@ public class LD17 extends Scene2D {
         itemLayer.add(new ImageSprite("tile_grass_1.png", 0, 64));
         itemLayer.add(new ImageSprite("tile_grass_1.png", 64, 64));
 
-        tam = new ImageSprite("tam.png", 0, 0);
-        itemLayer.add(tam);
+        player = new ImageSprite("player.png", 0, 0);
+        player.setAnchor(0.5, 0.5);
+        player.moveTo(320, 240, 0);
+        itemLayer.add(player);
+        cursorCone.bindLocationTo(player);
         
         CoreFont font = CoreFont.load("hello.font.png");
         theme = new Label(font, "HOORAY!!", 320, 50);
@@ -66,13 +72,38 @@ public class LD17 extends Scene2D {
     @Override
     public void update(int elapsedTime) {
         cursor.setLocation(Input.getMouseX(), Input.getMouseY());
-        cursorCone.setLocation(tam.x, tam.y);
 
         //cursor.visible.set(Input.isMouseInside());
 
         theme.y.animateTo(640 - Input.getMouseY(), 1000);
 
-        tam.x.animateTo(Input.getMouseX() - 320, 300);
-        tam.y.animateTo(Input.getMouseY() - 240, 300);
+        int vx = 0;
+        int vy = 0;
+        if (Input.isDown(Input.KEY_LEFT))  vx -= 1;
+        if (Input.isDown(Input.KEY_RIGHT)) vx += 1;
+        if (Input.isDown(Input.KEY_DOWN))  vy += 1;
+        if (Input.isDown(Input.KEY_UP))    vy -= 1;
+
+        double dx = playerSpeed * vx;
+        double dy = playerSpeed * vy;
+        player.x.set(player.x.get() + dx);
+        player.y.set(player.y.get() + dy);
+
+        // calculate angle stuff
+        double angle = Math.atan2(cursor.x.get() - player.x.get(), player.y.get() - cursor.y.get());
+        player.angle.set(angle);
+        cursorCone.angle.set(angle);
+        double distx = Math.abs(cursor.x.get() - player.x.get());
+        double disty = Math.abs(cursor.y.get() - player.y.get());
+        double distance = Math.sqrt(distx * distx + disty * disty);
+        cursorCone.scaleTo(cursorCone.width.get(), distance, 0);
+
+        if (CoreMath.randChance(5)) {
+          cursorCone.alpha.animateTo(50, 50);
+          cursor.alpha.animateTo(50, 50);
+        } else {
+          cursorCone.alpha.animateTo(255, 100);
+          cursor.alpha.animateTo(255, 100);
+        }
     }
 }
