@@ -1,8 +1,8 @@
 import pulpcore.CoreSystem;
+import pulpcore.Input;
 import pulpcore.math.CoreMath;
 import pulpcore.image.CoreFont;
 import pulpcore.image.BlendMode;
-import pulpcore.Input;
 import pulpcore.scene.Scene2D;
 import pulpcore.sound.Sound;
 import pulpcore.sprite.ImageSprite;
@@ -15,34 +15,21 @@ import static pulpcore.image.Colors.*;
 public class LD17 extends Scene2D {
     
     Label theme;
-    ImageSprite player;
-    ImageSprite cursor;
-    ImageSprite cursorCone;
+    Player player;
+    Flashlight flashlight;
     Group maskLayer;
-    Group flashlightLayer;
     Group helilightLayer;
     Group itemLayer;
     Group backLayer;
     
-    double playerSpeed = 2.0;
-    boolean flashlightOn = true;
-    double flashlightPower = 100.0;
-
     @Override
     public void load() {
         setCursor(Input.CURSOR_OFF);
-        cursor = new ImageSprite("light_glow_1.png", 0, 0);
-        cursor.setAnchor(0.5, 0.5);
-        //cursor.visible.set(false);
-        cursorCone = new ImageSprite("light_cone_1.png", 0, 0);
-        cursorCone.setAnchor(0.5, 1.0);
 
         maskLayer = new Group();
         maskLayer.add(new FilledSprite(gray(18)));
-        flashlightLayer = new Group();
-        flashlightLayer.add(cursor);
-        flashlightLayer.add(cursorCone);
-        maskLayer.add(flashlightLayer);
+        flashlight = new Flashlight(maskLayer);
+        maskLayer.add(flashlight);
         maskLayer.setBlendMode(BlendMode.Multiply());
         maskLayer.createBackBuffer();
 
@@ -55,11 +42,9 @@ public class LD17 extends Scene2D {
         itemLayer.add(new ImageSprite("tile_grass_1.png", 0, 64));
         itemLayer.add(new ImageSprite("tile_grass_1.png", 64, 64));
 
-        player = new ImageSprite("player.png", 0, 0);
-        player.setAnchor(0.5, 0.5);
+        player = new Player(flashlight);
         player.moveTo(320, 240, 0);
         itemLayer.add(player);
-        cursorCone.bindLocationTo(player);
         
         CoreFont font = CoreFont.load("hello.font.png");
         theme = new Label(font, "HOORAY!!", 320, 50);
@@ -77,41 +62,6 @@ public class LD17 extends Scene2D {
     
     @Override
     public void update(int elapsedTime) {
-        if (Input.isMousePressed()) {
-            flashlightOn = !flashlightOn;
-            //if (flashlightOn)
-        }
-
-        cursor.setLocation(Input.getMouseX(), Input.getMouseY());
-        //cursor.visible.set(Input.isMouseInside());
-
         theme.y.animateTo(640 - Input.getMouseY(), 1000);
-
-        int vx = 0;
-        int vy = 0;
-        if (Input.isDown(Input.KEY_LEFT))  vx -= 1;
-        if (Input.isDown(Input.KEY_RIGHT)) vx += 1;
-        if (Input.isDown(Input.KEY_DOWN))  vy += 1;
-        if (Input.isDown(Input.KEY_UP))    vy -= 1;
-
-        double dx = playerSpeed * vx;
-        double dy = playerSpeed * vy;
-        player.x.set(player.x.get() + dx);
-        player.y.set(player.y.get() + dy);
-
-        // calculate angle stuff
-        double angle = Math.atan2(cursor.x.get() - player.x.get(), player.y.get() - cursor.y.get());
-        player.angle.set(angle);
-        cursorCone.angle.set(angle);
-        double distx = Math.abs(cursor.x.get() - player.x.get());
-        double disty = Math.abs(cursor.y.get() - player.y.get());
-        double distance = Math.sqrt(distx * distx + disty * disty);
-        cursorCone.scaleTo(cursorCone.width.get(), distance, 0);
-
-        if (CoreMath.randChance(5)) {
-          flashlightLayer.alpha.animateTo(CoreMath.rand(100), 50);
-        } else {
-          flashlightLayer.alpha.animateTo(255, CoreMath.rand(50, 200));
-        }
     }
 }

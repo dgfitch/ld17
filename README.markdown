@@ -17,10 +17,16 @@
 
 20100424 17:32:33 - Man, this NOT turning out very object oriented. My lack of Java-touching is hurting.
 
+20100424 17:50:47 - Okay, gimp used to get nice flashlight blend. Too much time on making it look good, but it looks GOOD! Now for some object-izing, and then MOBS!
+
+20100424 17:59:28 - Arg, it helps if you put the new source files in src/.
+
+20100424 18:27:52 - OO working.
 
 ## TODO
 
 Possibly make heli shadow visible, with spinning neat blade alpha?
+Better player asset + possibly some animation, even though player is not usually visible
 
 ## Vim notes
 
