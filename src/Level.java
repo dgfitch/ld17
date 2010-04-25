@@ -23,6 +23,7 @@ public class Level extends Scene2D {
     ScoreMeter scoreMeter;
     UIMessage messager;
     Group maskLayer;
+    Group flareLayer;
     Group helilightLayer;
     Group itemLayer;
     Group backLayer;
@@ -40,18 +41,20 @@ public class Level extends Scene2D {
         if (levelNumber == 1) {
             messages.add("Oh my god, a light! There's someone still down there!");
             messages.add("Hey you, down there! Run with WASD or the arrow keys...");
+            messages.add("Click the left button to turn your flashlight on and off.");
             messages.add("Stay in the light to survive, kid, they don't like the light!");
-            messages.add("Click the left button to turn your flashlight on and off");
             messages.add("Shine your light at the doubts to stun them, dude!");
-            messages.add("Flash your light at a spot twice, and I'll drop a flare there");
+            messages.add("Flash your light at a spot twice, and I'll drop a flare there.");
             messages.add("You can shake your flashlight around to charge it faster");
         } else if (levelNumber == 2) {
             messages.add("Get a move on, kid!");
             messages.add("Damn! Something hit us, and took out the spotlight!");
             messages.add("Looks like it's going to be just your guts and our flares...");
+            messages.add("Don't forget, you can shake your light to charge it up faster.");
         } else if (levelNumber == 3) {
             messages.add("I still can't land with all of those things down there.");
             messages.add("Get to somewhere safe and we'll pick you up.");
+            messages.add("Remember, flash your light at a spot two times and I'll try to toss a flare close.");
         } else if (levelNumber == 4) {
             messages.add("Hop to it... they're coming!");
             messages.add("Damn it... I think they're getting used to the flashlight.");
@@ -73,6 +76,10 @@ public class Level extends Scene2D {
         maskLayer.setBlendMode(BlendMode.Multiply());
         maskLayer.createBackBuffer();
 
+        flareLayer = new Group();
+        flareLayer.setBlendMode(BlendMode.Add());
+        flareLayer.createBackBuffer();
+
         backLayer = new Group();
         backLayer.add(new ImageSprite("background.png", 0, 0));
 
@@ -90,6 +97,7 @@ public class Level extends Scene2D {
         addLayer(backLayer);
         addLayer(itemLayer);
         addLayer(maskLayer);
+        addLayer(flareLayer);
         addLayer(uiLayer);
         
         //// TODO: Not working
@@ -110,7 +118,7 @@ public class Level extends Scene2D {
             if (messageDelay <= 0) {
                 messager.addMessage(messages.get(0), CoreMath.rand(5000, 7000));
                 messages.remove(0);
-                messageDelay = CoreMath.rand(6000, 8000);
+                messageDelay = CoreMath.rand(4000, 6000);
             }
         }
 
@@ -126,6 +134,11 @@ public class Level extends Scene2D {
         if (time > levelDuration) {
             player.resetTime();
             Stage.replaceScene(new LevelOverScene(player));
+        }
+
+        if (Input.isDown(Input.KEY_F)) {
+            Flare f = new Flare(this, 320, 240);
+            flareLayer.add(f);
         }
     }
 }

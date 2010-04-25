@@ -49,17 +49,25 @@
 
 20100425 11:49:23 - UI messages partly written, level abstracted, helicopter pilot will yell different things per level.
 
+20100425 12:57:23 - Mmmm, lasagna. Probably shouldn't waste time with this, but I want to make the stunning more visceral, so time to figure out how to loop a "shakey" timeline on the stunned enemies.
+
+20100425 14:17:16 - I can't get the freakin' flare to animate frames right! GRAHHH, skipping for now...
+
+20100425 14:29:47 - Dang. The flare effect is too cpu intensive.
+
+20100425 14:32:28 - Tweaking some of the CPU load.
+
+
 ## TODO
 
+FLARE mechanic
 Lock cursor to window?
 Fullscreen?
-Better background(s)
 
 Enemies:
   "Turrets"
   Flyers?
   Hoppers?
-How to make it obvious the UI messages are coming from the helicopter pilot?
 Sounds
   Player hit
   Enemy stunned
@@ -68,9 +76,13 @@ Sounds
   Click flashlight
   Heli flare
   Heli chop
+Better background(s)
 make enemies come (mostly?) from edges of screen
+enemy logic so they try to avoid light sources
 Tree/object/enemy shadows - overlay in mask layer? too expensive?
 heli light that moves randomly around slowly for first level
+Options singleton for audio settings and difficulty stuff?
+How to make it obvious the UI messages are coming from the helicopter pilot?
 Scrollable tilemap for more exploration possibilities
   see if this is easy or hard with Viewport, etc. in pulpcore
 make enemies slightly more confused when flashlight is off?
@@ -91,6 +103,7 @@ Pickups
   Energy max
   Invuln
   Screen-clear
+Tuples for messages + delay would be nice
 
 ## Vim notes
 

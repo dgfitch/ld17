@@ -7,7 +7,7 @@ public class Enemy extends ImageSprite {
     Player player;
     double health = 10.0;
     double stunned = 0.0;
-    double stunRecoverySpeed = 0.001;
+    double stunRecoverySpeed = 0.0001;
     double damage = 0.05;
     int points = 1;
 

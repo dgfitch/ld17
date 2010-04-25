@@ -23,10 +23,10 @@ public class Flashlight extends Group {
         super();
         mask = maskLayer;
 
-        cursor = new ImageSprite("light_glow_1.png", 0, 0);
+        cursor = new ImageSprite("light_glow_2.png", 0, 0);
         cursor.setAnchor(0.5, 0.5);
         add(cursor);
-        cursorCone = new ImageSprite("light_cone_1.png", 0, 0);
+        cursorCone = new ImageSprite("light_cone_2.png", 0, 0);
         cursorCone.setAnchor(0.5, 1.0);
         add(cursorCone);
     }
