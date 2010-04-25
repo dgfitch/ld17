@@ -20,10 +20,10 @@ public class Player extends ImageSprite {
 
         int vx = 0;
         int vy = 0;
-        if (Input.isDown(Input.KEY_LEFT))  vx -= 1;
-        if (Input.isDown(Input.KEY_RIGHT)) vx += 1;
-        if (Input.isDown(Input.KEY_DOWN))  vy += 1;
-        if (Input.isDown(Input.KEY_UP))    vy -= 1;
+        if (Input.isDown(Input.KEY_UP)    || Input.isDown(Input.KEY_W)) vy -= 1;
+        if (Input.isDown(Input.KEY_LEFT)  || Input.isDown(Input.KEY_A)) vx -= 1;
+        if (Input.isDown(Input.KEY_DOWN)  || Input.isDown(Input.KEY_S)) vy += 1;
+        if (Input.isDown(Input.KEY_RIGHT) || Input.isDown(Input.KEY_D)) vx += 1;
 
         double dx = playerSpeed * vx;
         double dy = playerSpeed * vy;

@@ -23,14 +23,40 @@
 
 20100424 18:27:52 - OO working.
 
+20100424 21:22:29 - Firing it up again after a quality dinner with Arun.
+
+20100424 21:36:04 - Can't get the flashlight intensity to fall off with distance correctly. Bleh.
+
+20100424 22:05:27 - Flashlight behaves right finally, flickering more as power goes out. SWEET
+
 ## TODO
 
+Lock cursor to window?
+Enemies:
+  Swarmers
+  "Turrets"
+  Flyers?
+Vsync to reduce tearing?
+Scrollable tilemap
+"is lit" check for pixel/sprite/whatever
+UI layer
+  Gauge for flashlight power
+  Timer for "how long alive"
+  Score for how many baddies killed
+  Level
+
 Possibly make heli shadow visible, with spinning neat blade alpha?
+Tree/objects with shadows
 Better player asset + possibly some animation, even though player is not usually visible
+Music
+  OGG?
+  Pacing?
+  Layers?
 
 ## Vim notes
 
     :set makeprg=ant\ -emacs
+    :set sw=4
 
 Used this tutorial to get exuberant ctags working with Java base docs and Pulpcore API:
 
