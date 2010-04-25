@@ -17,10 +17,12 @@ public class LD17 extends Scene2D {
     Label theme;
     Player player;
     Flashlight flashlight;
+    ScoreMeter scoreMeter;
     Group maskLayer;
     Group helilightLayer;
     Group itemLayer;
     Group backLayer;
+    Group uiLayer;
     
     @Override
     public void load() {
@@ -51,9 +53,15 @@ public class LD17 extends Scene2D {
         theme.setAnchor(0.5, 0.5);
         itemLayer.add(theme);
 
+        uiLayer = new Group();
+        uiLayer.add(new FlashlightMeter(flashlight));
+        scoreMeter = new ScoreMeter();
+        uiLayer.add(scoreMeter);
+
         addLayer(backLayer);
         addLayer(itemLayer);
         addLayer(maskLayer);
+        addLayer(uiLayer);
         
         //// TODO: Not working
         //Sound sound = Sound.load("sound.wav");

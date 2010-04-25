@@ -41,6 +41,15 @@ public class Flashlight extends Group {
         return cursor.y.get();
     }
 
+    public boolean isOn() {
+        return on;
+    }
+
+    // TODO: haha I don't know how to do properties in java
+    public double getPower() {
+        return power;
+    }
+
     @Override
     public void update(int elapsedTime) {
         super.update(elapsedTime);
@@ -84,7 +93,7 @@ public class Flashlight extends Group {
             cursorCone.visible.set(distance > 20.0);
 
             if (flicker == 0.0) {
-                if (CoreMath.randChance(CoreMath.clamp(50 / ((int)power + 1), 0, 4))) {
+                if (CoreMath.randChance(CoreMath.clamp(50 / ((int)power + 1), 0, 8))) {
                     flicker = 1.0;
                     alpha.animateTo(lensIntensity / CoreMath.rand(2, 5), 50);
                 } else {

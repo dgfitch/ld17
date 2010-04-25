@@ -29,6 +29,10 @@
 
 20100424 22:05:27 - Flashlight behaves right finally, flickering more as power goes out. SWEET
 
+20100424 22:45:25 - Settling in at home a bit, going to try to get a little UI and enemies that respond to light
+
+20100424 23:47:41 - UI started
+
 ## TODO
 
 Lock cursor to window?
@@ -36,22 +40,20 @@ Enemies:
   Swarmers
   "Turrets"
   Flyers?
-Vsync to reduce tearing?
+Shaking mouse recharges flashlight
 Scrollable tilemap
 "is lit" check for pixel/sprite/whatever
-UI layer
-  Gauge for flashlight power
-  Timer for "how long alive"
-  Score for how many baddies killed
-  Level
-
+Tutorial text
+Tree/object/enemy shadows
 Possibly make heli shadow visible, with spinning neat blade alpha?
-Tree/objects with shadows
 Better player asset + possibly some animation, even though player is not usually visible
+Crosshair/indicator for mouse cursor when flashlight is off
+UI layer: Level #
 Music
   OGG?
   Pacing?
   Layers?
+Vsync to reduce tearing? Looked, doesn't look like it
 
 ## Vim notes
 
