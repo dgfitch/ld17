@@ -1,4 +1,4 @@
-# LD 17: Islands (codename Envasive)
+# LD 17: Crowned in Doubt (codename Envasive)
 -------------
 
 ## Progress log
@@ -35,29 +35,25 @@
 
 20100425 02:09:37 - You can now stun and kill crawling enemies for points. ALLLlllright. Also you can die and there's a game over screen! SWEET
 
+20100425 02:24:35 - Man, there's a lot to do tomorrow. Going to have to prioritize!
 
 ## TODO
 
 Lock cursor to window?
+Fullscreen?
+
 Enemies:
   "Turrets"
   Flyers?
 Shaking mouse fast recharges flashlight?
-Scrollable tilemap
-Tutorial text and UI messages
-  "Stay in the light to survive!"
+Tutorial text and UI messages from the helicopter escort
+  How to make it obvious the messages are coming from the helicopter?
+  "Run with WASD or the arrow keys"
+  "Stay in the light to survive"
   "Click to turn your flashlight on and off"
   "Shine your light at the Doubts to stun them"
-  "Flash your light twice, and your helicopter escort will drop a flare there"
+  "Flash your light at a spot twice, and I'll drop a flare there"
   "Shake your flashlight to charge it faster"
-Tree/object/enemy shadows
-heli light for first level or so
-make enemies slightly more confused when flashlight is off?
-Possibly make heli shadow visible, with spinning neat blade alpha?
-Better player asset + possibly some animation, even though player is not usually visible
-Better crawler asset + animation
-Crosshair/indicator for mouse cursor when flashlight is off
-UI layer: Level #
 Sounds
   Player hit
   Enemy stunned
@@ -66,11 +62,28 @@ Sounds
   Click flashlight
   Heli flare
   Heli chop
+Tree/object/enemy shadows - overlay in mask layer? too expensive?
+heli light that moves randomly around slowly for first level
+Scrollable tilemap for more exploration possibilities
+  see if this is easy or hard with Viewport, etc. in pulpcore
+make enemies slightly more confused when flashlight is off?
+Possibly make heli shadow visible, with spinning neat blade alpha?
+Better player asset + possibly some animation, even though player is not usually visible
+Better crawler asset + animation
+Crosshair/indicator for mouse cursor when flashlight is off
+UI layer: Level #
 Music
   OGG?
   Pacing?
   Layers?
 Vsync to reduce tearing? Looked, doesn't look like it
+Pickups
+  Health
+  Flashlight energy
+  Health max
+  Energy max
+  Invuln
+  Screen-clear
 
 ## Vim notes
 

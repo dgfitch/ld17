@@ -17,7 +17,7 @@ public class TitleScene extends Scene2D {
     @Override
     public void load() {
         
-        Label title = new Label(CoreFont.load("hello.font.png"), "Envasive", 320, 240);
+        Label title = new Label(CoreFont.load("hello.font.png"), "Crowned in Doubt", 320, 240);
         title.setAnchor(0.5, 0.5);
         playButton = Button.createLabeledButton("Play", 320, 320);
         playButton.setAnchor(0.5, 0.5);
