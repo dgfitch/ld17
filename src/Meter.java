@@ -11,29 +11,28 @@ public class Meter extends Group {
     FilledSprite black;
     FilledSprite flashlightMeter;
     FilledSprite healthMeter;
-    UIBox box;
 
-    int mh = 182;
+    int mh = 460;
     int mw = 5;
+    int mx = 5;
+    int my = 5;
 
     public Meter(Player p, Flashlight f) {
         player = p;
         flashlight = f;
-        box = new UIBox(mw+23, mh+18);
         black = new FilledSprite(BLACK);
-        black.scaleTo(mw+13,mh+8,0);
-        black.moveTo(5,5,0);
-        flashlightMeter = new FilledSprite(BLUE);
+        black.scaleTo(mw*2+4,mh+4,0);
+        black.moveTo(mx-2,my-2,0);
+        flashlightMeter = new FilledSprite(WHITE);
         flashlightMeter.scaleTo(mw,mh,0);
-        flashlightMeter.moveTo(9,9,0);
+        flashlightMeter.moveTo(mx+mw,my,0);
         healthMeter = new FilledSprite(GREEN);
         healthMeter.scaleTo(mw,mh,0);
-        healthMeter.moveTo(9+mw,9,0);
-        add(box);
+        healthMeter.moveTo(mx,my,0);
         add(black);
         add(flashlightMeter);
         add(healthMeter);
-        moveTo(10,10,0);
+        moveTo(mx,my,0);
     }
 
     @Override
@@ -48,7 +47,7 @@ public class Meter extends Group {
         if (flashlight.isOn()) {
             alpha.set(200);
         } else {
-            alpha.set(30);
+            alpha.set(150);
         }
     }
 

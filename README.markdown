@@ -41,24 +41,25 @@
 
 20100425 10:54:24 - I don't know what I was thinking, coding in mostly silence all this time! Rocking the last Buried Inside album.
 
+20100425 11:04:18 - The ui box is ugly and stupid. Minimalizing it.
+
+20100425 11:20:46 - Adding messages UI.
+
+20100425 11:29:16 - Haha, I have NO IDEA how to do typed lists of tuples in Java.
+
+20100425 11:49:23 - UI messages partly written, level abstracted, helicopter pilot will yell different things per level.
+
 ## TODO
 
 Lock cursor to window?
 Fullscreen?
-Move distance to utility function?
+Better background(s)
 
 Enemies:
   "Turrets"
   Flyers?
-Shaking mouse fast recharges flashlight?
-Tutorial text and UI messages from the helicopter escort
-  How to make it obvious the messages are coming from the helicopter?
-  "Run with WASD or the arrow keys"
-  "Stay in the light to survive"
-  "Click to turn your flashlight on and off"
-  "Shine your light at the Doubts to stun them"
-  "Flash your light at a spot twice, and I'll drop a flare there"
-  "Shake your flashlight to charge it faster"
+  Hoppers?
+How to make it obvious the UI messages are coming from the helicopter pilot?
 Sounds
   Player hit
   Enemy stunned
@@ -67,6 +68,7 @@ Sounds
   Click flashlight
   Heli flare
   Heli chop
+make enemies come (mostly?) from edges of screen
 Tree/object/enemy shadows - overlay in mask layer? too expensive?
 heli light that moves randomly around slowly for first level
 Scrollable tilemap for more exploration possibilities

@@ -13,10 +13,11 @@ public class Flashlight extends Group {
     double power = 100.0;
     double flicker = 0.0;
     double switched = 0.0;
-    double damage = 0.05;
+    double damage = 0.005;
     double lastX = 320.0;
     double lastY = 240.0;
     double recharge = 0.02;
+    double shakeRecharge = 0.0005;
 
     public Flashlight(Group maskLayer) {
         super();
@@ -25,9 +26,6 @@ public class Flashlight extends Group {
         cursor = new ImageSprite("light_glow_1.png", 0, 0);
         cursor.setAnchor(0.5, 0.5);
         add(cursor);
-        // TODO: reduce size somewhat
-        // TODO: reduce intensity with distance
-        //cursor.setSize();
         cursorCone = new ImageSprite("light_cone_1.png", 0, 0);
         cursorCone.setAnchor(0.5, 1.0);
         add(cursorCone);
@@ -74,7 +72,7 @@ public class Flashlight extends Group {
 
         // charge flashlight if the mouse is moving a lot
         double mouseMoved = Utils.dist(cx, cy, lastX, lastY);
-        power += elapsedTime * mouseMoved / 5000.0;
+        power += elapsedTime * mouseMoved * shakeRecharge;
 
         if (!on) {
             if (power < 100.0) 

@@ -6,8 +6,8 @@ public class Crawler extends Enemy {
     public Crawler(Player p, int x, int y) {
         super(p, "enemy_crawler.png", x, y);
         speed = CoreMath.rand(0.3, 0.8);
-        if (speed > 0.6) points = 2;
-        health = CoreMath.rand(15.0, 20.0);
+        health = p.getLevelNumber() + CoreMath.rand(3.0, 7.0);
+        points = (int)health;
         int size = CoreMath.rand(20, 40);
         setSize(size, size);
     }

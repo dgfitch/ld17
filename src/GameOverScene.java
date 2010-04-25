@@ -16,10 +16,12 @@ public class GameOverScene extends Scene2D {
     Button quitButton;
     Group componentLayer;
     int finalScore;
+    Player player;
 
-    public GameOverScene(int score) {
+    public GameOverScene(Player p) {
         super();
-        finalScore = score;
+        finalScore = p.score;
+        player = p;
     }
     
     @Override
@@ -54,7 +56,7 @@ public class GameOverScene extends Scene2D {
     @Override 
     public void update(int elapsedTime) {
         if (continueButton.isClicked()) {
-            Stage.setScene(new LD17());
+            Stage.setScene(new Level(player.getLevelNumber(), new Player()));
         }
         else if (quitButton.isClicked()) {
             Stage.setScene(new TitleScene());
