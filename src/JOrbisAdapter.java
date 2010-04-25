@@ -102,7 +102,7 @@ public class JOrbisAdapter extends Sound {
         super(src.file.getSampleRate());
         this.filename = src.filename;
         this.file = src.file;
-        setSimultaneousPlaybackCount(src.getSimultaneousPlaybackCount());
+        //setSimultaneousPlaybackCount(src.getSimultaneousPlaybackCount());
     }
 
     public int getNumFrames() {

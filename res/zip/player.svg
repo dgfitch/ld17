@@ -14,7 +14,7 @@
    id="svg6406"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="New document 20">
+   sodipodi:docname="player.svg">
   <defs
      id="defs6408">
     <inkscape:perspective
@@ -91,5 +91,15 @@
        height="31.454546"
        x="46.181808"
        y="1.7272727" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path9854"
+       sodipodi:cx="31.90909"
+       sodipodi:cy="33.545456"
+       sodipodi:rx="17.90909"
+       sodipodi:ry="19"
+       d="m 49.81818,33.545456 a 17.90909,19 0 1 1 -35.81818,0 17.90909,19 0 1 1 35.81818,0 z"
+       transform="matrix(1.0036046,0,0,0.91248858,-0.11502078,4.6628831)" />
   </g>
 </svg>

@@ -35,7 +35,7 @@ public class Flare extends Group {
         flare = new ImageSprite("flare.png", 0, 0);
         flare.setAnchor(0.5,0.5);
         flare.angle.set(CoreMath.rand(-2*Math.PI, 2*Math.PI));
-        add(flare);
+        level.getItemLayer().add(flare);
 
         glows = CoreImage.load("spark_glow.png").split(4, 1);
         sparks = CoreImage.load("spark.png").split(4, 1);
@@ -115,6 +115,7 @@ public class Flare extends Group {
 
         if (time > duration + timeLit) {
             glow.removeFromParent();
+            flare.removeFromParent();
             removeFromParent();
         }
     }

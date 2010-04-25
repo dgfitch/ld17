@@ -68,6 +68,7 @@
 ## TODO
 
 
+move flare to item layer
 Enemies:
   "Turrets"
   Flyers?
@@ -79,8 +80,6 @@ Sounds
   Enemy death
   Player death
   Click flashlight
-  Heli flare
-  Heli chop
 Better background(s)
 BUG: enemies don't get unstunned when flashlight is off
 enemy logic so they try to avoid light sources - A*? blah

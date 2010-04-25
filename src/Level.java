@@ -114,8 +114,17 @@ public class Level extends Scene2D {
     }
 
     public Group getMaskLayer() { return maskLayer; }
+    public Group getItemLayer() { return itemLayer; }
 
     private void addCrawler() {
+        addEnemy(0);
+    }
+
+    private void addCentipede() {
+        addEnemy(1);
+    }
+
+    private void addEnemy(int kind) {
         // Make it pop out of the edges only
         int cx = 0;
         int cy = 0;
@@ -133,14 +142,26 @@ public class Level extends Scene2D {
                     cy = CoreMath.rand(480, 500);
                     break;
         }
-        Crawler c = new Crawler(player, this, cx, cy);
-        itemLayer.add(c);
+
+        // Switching on int = LOL [in a hurry]
+        switch (kind) {
+        case 0: 
+            Crawler c = new Crawler(player, this, cx, cy);
+            itemLayer.add(c);
+            break;
+        case 1:
+            Centipede p = new Centipede(player, this, cx, cy);
+            itemLayer.add(p);
+            break;
+        }
     }
 
     public void addFlare(int x, int y) {
         // Timer is to stop player from spamming
         if (flareCount < flareAllowed) {
             debug("level is launching flare to " + x + ", " + y);
+            Sound sound = Sound.load("check.ogg");
+            sound.play();
             Flare f = new Flare(this, x, y);
             flares.add(f);
             flaresLayer.add(f);
@@ -209,6 +230,9 @@ public class Level extends Scene2D {
         if (shouldSpawn) {
             if (CoreMath.randChance(1)) {
                 addCrawler();
+            }
+            if (CoreMath.randChance(1)) {
+                addCentipede();
             }
         }
 
