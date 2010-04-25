@@ -65,6 +65,8 @@
 
 20100425 16:42:57 - Testing ogg plugin. Not as easy to use as I hoped. Doh.
 
+20100425 17:46:41 - Adding a second enemy, still no smart AI. The stupid svg pipeline won't do my awesome TEETH!
+
 ## TODO
 
 

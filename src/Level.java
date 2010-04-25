@@ -243,6 +243,9 @@ public class Level extends Scene2D {
             Stage.replaceScene(new LevelOverScene(player));
         }
 
+        if (Build.DEBUG && Input.isDown(Input.KEY_C)) addCrawler();
+        if (Build.DEBUG && Input.isDown(Input.KEY_V)) addCentipede();
+
         // random encouragement from the heli
         if (messages.size() == 0 && CoreMath.rand(0.0, 1.0) > 0.98) {
             if (levelDuration - time < 5000) {

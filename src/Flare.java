@@ -32,7 +32,7 @@ public class Flare extends Group {
         glow.scaleTo(200,200,0);
         level.getMaskLayer().add(glow);
 
-        flare = new ImageSprite("flare.png", 0, 0);
+        flare = new ImageSprite("flare.png", sx, sy);
         flare.setAnchor(0.5,0.5);
         flare.angle.set(CoreMath.rand(-2*Math.PI, 2*Math.PI));
         level.getItemLayer().add(flare);

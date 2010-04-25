@@ -1,6 +1,7 @@
 import pulpcore.CoreSystem;
 import pulpcore.math.CoreMath;
 import pulpcore.sprite.ImageSprite;
+import pulpcore.image.AnimatedImage;
 
 public class Enemy extends ImageSprite {
     double speed;
@@ -34,7 +35,15 @@ public class Enemy extends ImageSprite {
         stunned = 1.0;
         x.animateTo(x.get() + CoreMath.rand(-10, 10), 1000);
         y.animateTo(y.get() + CoreMath.rand(-10, 10), 1000);
-        // TODO: spazz out the angle
+        
+        AnimatedImage image = (AnimatedImage)getImage();
+        image.stop();
+        // TODO: spazz out the angle?
+    }
+
+    public void doEndStun() {
+        AnimatedImage image = (AnimatedImage)getImage();
+        image.start();
     }
 
     public void doDamage(double multiplier, int elapsedTime) {
@@ -51,6 +60,8 @@ public class Enemy extends ImageSprite {
 
         if (stunned > 0.0) {
             stunned -= elapsedTime * stunRecoverySpeed;
+            if (stunned <= 0.0)
+                doEndStun();
             if (touchingFlashlight) doDamage(player.getFlashlight().getDamage(), elapsedTime);
             if (touchingFlare) doDamage(level.getFlareDamage(), elapsedTime);
         } else {

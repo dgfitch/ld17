@@ -8,7 +8,7 @@ public class Centipede extends Enemy {
         speed = CoreMath.rand(0.8, 1.0) + (p.getLevelNumber() / 10);
         health = p.getLevelNumber() + CoreMath.rand(2.0, 5.0);
         points = (int)health;
-        int size = CoreMath.rand(30, 50);
+        int size = CoreMath.rand(20, 30);
         setSize(size, size);
     }
 
