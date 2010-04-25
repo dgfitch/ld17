@@ -33,22 +33,39 @@
 
 20100424 23:47:41 - UI started
 
+20100425 02:09:37 - You can now stun and kill crawling enemies for points. ALLLlllright. Also you can die and there's a game over screen! SWEET
+
+
 ## TODO
 
 Lock cursor to window?
 Enemies:
-  Swarmers
   "Turrets"
   Flyers?
-Shaking mouse recharges flashlight
+Shaking mouse fast recharges flashlight?
 Scrollable tilemap
-"is lit" check for pixel/sprite/whatever
-Tutorial text
+Tutorial text and UI messages
+  "Stay in the light to survive!"
+  "Click to turn your flashlight on and off"
+  "Shine your light at the Doubts to stun them"
+  "Flash your light twice, and your helicopter escort will drop a flare there"
+  "Shake your flashlight to charge it faster"
 Tree/object/enemy shadows
+heli light for first level or so
+make enemies slightly more confused when flashlight is off?
 Possibly make heli shadow visible, with spinning neat blade alpha?
 Better player asset + possibly some animation, even though player is not usually visible
+Better crawler asset + animation
 Crosshair/indicator for mouse cursor when flashlight is off
 UI layer: Level #
+Sounds
+  Player hit
+  Enemy stunned
+  Enemy death
+  Player death
+  Click flashlight
+  Heli flare
+  Heli chop
 Music
   OGG?
   Pacing?

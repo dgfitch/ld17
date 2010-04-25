@@ -1,5 +1,6 @@
 import pulpcore.sprite.Group;
 import pulpcore.sprite.ImageSprite;
+import pulpcore.sprite.Sprite;
 import pulpcore.math.CoreMath;
 import pulpcore.Input;
 
@@ -12,6 +13,7 @@ public class Flashlight extends Group {
     double power = 100.0;
     double flicker = 0.0;
     double switched = 0.0;
+    double damage = 0.05;
 
     public Flashlight(Group maskLayer) {
         super();
@@ -33,22 +35,18 @@ public class Flashlight extends Group {
         cursorCone.bindLocationTo(p);
     }
 
-    public double focusX() {
-        return cursor.x.get();
-    }
-
-    public double focusY() {
-        return cursor.y.get();
-    }
-
-    public boolean isOn() {
-        return on;
-    }
-
     // TODO: haha I don't know how to do properties in java
-    public double getPower() {
-        return power;
+    public double focusX() { return cursor.x.get(); }
+    public double focusY() { return cursor.y.get(); }
+    public boolean isOn() { return on; }
+    public double getPower() { return power; }
+    public double getDamage() { return damage; }
+
+    public boolean isTouching(Sprite other) {
+        return (on && cursor.intersects(other));
+        // TODO: also check light cone??
     }
+
 
     @Override
     public void update(int elapsedTime) {

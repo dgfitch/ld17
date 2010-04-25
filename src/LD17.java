@@ -54,8 +54,8 @@ public class LD17 extends Scene2D {
         itemLayer.add(theme);
 
         uiLayer = new Group();
-        uiLayer.add(new FlashlightMeter(flashlight));
-        scoreMeter = new ScoreMeter();
+        uiLayer.add(new Meter(player, flashlight));
+        scoreMeter = new ScoreMeter(player);
         uiLayer.add(scoreMeter);
 
         addLayer(backLayer);
