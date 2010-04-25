@@ -30,11 +30,12 @@ public class Level extends Scene2D {
     Group backLayer;
     Group uiLayer;
     ArrayList<String> messages;
-    ArrayList<Flare> flares;
 
-    int flareDelay = 4000;
+    ArrayList<Flare> flares;
+    int flareDelay = 9000;
     int flareCount = 0;
-    int flareAllowed = 3000;
+    int flareAllowed = 4000;
+    double flareDamage = 0.01;
 
     int messageDelay = 500;
 
@@ -115,13 +116,29 @@ public class Level extends Scene2D {
     public Group getMaskLayer() { return maskLayer; }
 
     private void addCrawler() {
-        // TODO: Make it pop out of the edges only
-        Crawler c = new Crawler(player, CoreMath.rand(0, 640), CoreMath.rand(0, 480));
+        // Make it pop out of the edges only
+        int cx = 0;
+        int cy = 0;
+        switch (CoreMath.rand(0,3)) {
+            case 0: cx = CoreMath.rand(-20, 0);
+                    cy = CoreMath.rand(0, 480);
+                    break;
+            case 1: cx = CoreMath.rand(640, 660);
+                    cy = CoreMath.rand(0, 480);
+                    break;
+            case 2: cx = CoreMath.rand(0, 640);
+                    cy = CoreMath.rand(-20, 0);
+                    break;
+            case 3: cx = CoreMath.rand(0, 640);
+                    cy = CoreMath.rand(480, 500);
+                    break;
+        }
+        Crawler c = new Crawler(player, this, cx, cy);
         itemLayer.add(c);
     }
 
     public void addFlare(int x, int y) {
-        // TODO: Timer to stop player from spamming
+        // Timer is to stop player from spamming
         if (flareCount < flareAllowed) {
             debug("level is launching flare to " + x + ", " + y);
             Flare f = new Flare(this, x, y);
@@ -129,7 +146,7 @@ public class Level extends Scene2D {
             flaresLayer.add(f);
             flareCount += flareDelay;
         } else {
-            switch (CoreMath.rand(0,6)) {
+            switch (CoreMath.rand(0,9)) {
                 case 0: messager.addMessage("I can't keep up with you, kid!",3000);
                         break;
                 case 1: messager.addMessage("You're giving epilepsy up here...",2000);
@@ -144,10 +161,26 @@ public class Level extends Scene2D {
                         break;
                 case 6: messager.addMessage("Okay, Blinky McBlinkerson, I'm working on it.", 3500);
                         break;
+                case 7: messager.addMessage("Cripes, hang on, I'm not a machine...", 2000);
+                        break;
+                case 8: messager.addMessage("Sec, kid!", 1000);
+                        break;
+                case 9: messager.addMessage("Hang on!", 1000);
+                        break;
                 default: messager.addMessage("Sheesh, I'm on it!", 2000);
             }
         }
     }
+
+    public boolean isFlareTouching(ImageSprite x) {
+        for (Flare f : flares) {
+            if (f.isLit() && f.getGlow().intersects(x))
+                return true;
+        }
+        return false;
+    }
+
+    public double getFlareDamage() { return flareDamage; }
 
     public void removeFlare(Flare f) {
         if (flares.contains(f)) {

@@ -59,20 +59,22 @@
 
 20100425 15:44:13 - Flare clicky mechanics partly working.
 
+20100425 16:30:53 - Crawlers pop out of the sides, and take damage from flares hopefully...
+
+20100425 16:31:58 - Does putting quotes around the crap the helicopter pilot say make it obvious it's coming from a game entity in the sky? I HOPE SO!
+
+20100425 16:42:57 - Testing ogg plugin. Not as easy to use as I hoped. Doh.
 
 ## TODO
 
-Lock cursor to window?
-Fullscreen?
-
-make enemies take damage from flares
 
 Enemies:
   "Turrets"
   Flyers?
   Hoppers?
 Sounds
-  Player hit
+  Player hit by enemy
+  Flare drop
   Enemy stunned
   Enemy death
   Player death
@@ -81,12 +83,10 @@ Sounds
   Heli chop
 Better background(s)
 BUG: enemies don't get unstunned when flashlight is off
-make enemies come (mostly?) from edges of screen
-enemy logic so they try to avoid light sources
+enemy logic so they try to avoid light sources - A*? blah
 Tree/object/enemy shadows - overlay in mask layer? too expensive?
 heli light that moves randomly around slowly for first level
 Options singleton for audio settings and difficulty stuff?
-How to make it obvious the UI messages are coming from the helicopter pilot?
 Scrollable tilemap for more exploration possibilities
   see if this is easy or hard with Viewport, etc. in pulpcore
 make enemies slightly more confused when flashlight is off?
@@ -108,6 +108,8 @@ Pickups
   Invuln
   Screen-clear
 Tuples for messages + delay would be nice
+Lock cursor to window?
+Fullscreen?
 
 ## Vim notes
 

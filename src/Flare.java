@@ -13,7 +13,7 @@ import static pulpcore.image.Colors.*;
 public class Flare extends Group {
     int time = 0;
     int timeLit = 600;
-    int duration = 6000;
+    int duration = 10000;
     boolean fading = false;
     boolean lit = false;
     ImageSprite glow;
@@ -52,6 +52,9 @@ public class Flare extends Group {
         CoreImage image = glows[CoreMath.rand(glows.length - 1)];
         addParticle(new ImageSprite(image, 0, 0), 2, CoreMath.rand(20, 48));
     }
+
+    public boolean isLit() { return lit; }
+    public ImageSprite getGlow() { return glow; }
 
     public void addParticle(ImageSprite s, int speed, int size) {
         Timeline t = new Timeline();
@@ -95,11 +98,11 @@ public class Flare extends Group {
         }
 
         if (fading) {
-            glow.alpha.set(CoreMath.rand(10, 50));
+            glow.alpha.set(CoreMath.rand(0, 10));
         } else if (lit) {
-            glow.alpha.set(CoreMath.rand(120, 250));
+            glow.alpha.set(CoreMath.rand(220, 250));
         } else {
-            glow.alpha.set(CoreMath.rand(50, 100));
+            glow.alpha.set(CoreMath.rand(10, 50));
         }
 
         if (time < duration - timeLit) {

@@ -44,7 +44,7 @@ public class LevelOverScene extends Scene2D {
     @Override 
     public void update(int elapsedTime) {
         time += elapsedTime;
-        if (time > 3000) {
+        if (time > 5000) {
             Stage.replaceScene(new Level(levelNumber + 1, player));
         }
     }

@@ -20,7 +20,7 @@ public class UIMessage extends Group {
     }
 
     public void addMessage(String s, int duration) {
-        Label l = new Label(font, s, 0, 0);
+        Label l = new Label(font, "\"" + s + "\"", 0, 0);
         l.setAnchor(0.5, 0.5);
 
         Timeline t = new Timeline();

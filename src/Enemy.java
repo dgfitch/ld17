@@ -5,15 +5,17 @@ import pulpcore.sprite.ImageSprite;
 public class Enemy extends ImageSprite {
     double speed;
     Player player;
+    Level level;
     double health = 10.0;
     double stunned = 0.0;
     double stunRecoverySpeed = 0.0001;
     double damage = 0.05;
     int points = 1;
 
-    public Enemy(Player p, String image, int x, int y) {
+    public Enemy(Player p, Level l, String image, int x, int y) {
         super(image, x, y);
         player = p;
+        level = l;
         setAnchor(0.5, 0.5);
     }
 
@@ -45,12 +47,14 @@ public class Enemy extends ImageSprite {
 
         // check if we should be stunned and/or damaged
         boolean touchingFlashlight = player.getFlashlight().isTouching(this);
+        boolean touchingFlare = level.isFlareTouching(this);
 
         if (stunned > 0.0) {
             stunned -= elapsedTime * stunRecoverySpeed;
             if (touchingFlashlight) doDamage(player.getFlashlight().getDamage(), elapsedTime);
+            if (touchingFlare) doDamage(level.getFlareDamage(), elapsedTime);
         } else {
-            if (touchingFlashlight) {
+            if (touchingFlashlight || touchingFlare) {
                 doStun();
             } else if (this.intersects(player)) {
                 player.doDamage(damage, elapsedTime);
