@@ -8,6 +8,7 @@ public class Flashlight extends Group {
     ImageSprite cursor;
     ImageSprite cursorCone;
     Group mask;
+    Level level;
     Player player;
     boolean on = true;
     double power = 100.0;
@@ -18,10 +19,15 @@ public class Flashlight extends Group {
     double lastY = 240.0;
     double recharge = 0.02;
     double shakeRecharge = 0.0005;
+    int firstClick = 0;
+    int clicks = 0;
+    boolean clicked = false;
+    int flareTime = 1500;
 
-    public Flashlight(Group maskLayer) {
+    public Flashlight(Level l) {
         super();
-        mask = maskLayer;
+        level = l;
+        mask = level.getMaskLayer();
 
         cursor = new ImageSprite("light_glow_2.png", 0, 0);
         cursor.setAnchor(0.5, 0.5);
@@ -70,6 +76,25 @@ public class Flashlight extends Group {
         double cx = cursor.x.get();
         double cy = cursor.y.get();
 
+        if (Input.isMouseDown() && !clicked) {
+            if (clicks == 0)
+                firstClick = player.getTime();
+            clicks += 1;
+            clicked = true;
+        } else if (Input.isMouseReleased() && clicked) {
+            clicked = false;
+        }
+        if (clicks >= 4) {
+            if (player.getTime() - firstClick < flareTime) {
+                level.addFlare((int)cx, (int)cy);
+            }
+            clicks = 0;
+        }
+
+        if (player.getTime() - firstClick > flareTime) clicks = 0;
+
+        //level.debug("Have " + clicks + " clicks since " + firstClick);
+
         // charge flashlight if the mouse is moving a lot
         double mouseMoved = Utils.dist(cx, cy, lastX, lastY);
         power += elapsedTime * mouseMoved * shakeRecharge;
@@ -112,5 +137,6 @@ public class Flashlight extends Group {
         if (power > 100.0) power = 100.0;
         lastX = cx;
         lastY = cy;
+
     }
 }

@@ -1,4 +1,5 @@
 import pulpcore.CoreSystem;
+import pulpcore.Build;
 import pulpcore.Input;
 import pulpcore.math.CoreMath;
 import pulpcore.image.CoreFont;
@@ -23,12 +24,17 @@ public class Level extends Scene2D {
     ScoreMeter scoreMeter;
     UIMessage messager;
     Group maskLayer;
-    Group flareLayer;
     Group helilightLayer;
     Group itemLayer;
+    Group flaresLayer;
     Group backLayer;
     Group uiLayer;
     ArrayList<String> messages;
+    ArrayList<Flare> flares;
+
+    int flareDelay = 4000;
+    int flareCount = 0;
+    int flareAllowed = 3000;
 
     int messageDelay = 500;
 
@@ -37,6 +43,7 @@ public class Level extends Scene2D {
         player = p;
         player.setLevelNumber(n);
         levelNumber = n;
+        flares = new ArrayList<Flare>();
         messages = new ArrayList<String>();
         if (levelNumber == 1) {
             messages.add("Oh my god, a light! There's someone still down there!");
@@ -70,15 +77,11 @@ public class Level extends Scene2D {
 
         maskLayer = new Group();
         maskLayer.add(new FilledSprite(gray(18)));
-        flashlight = new Flashlight(maskLayer);
+        flashlight = new Flashlight(this);
         player.setFlashlight(flashlight);
         maskLayer.add(flashlight);
         maskLayer.setBlendMode(BlendMode.Multiply());
         maskLayer.createBackBuffer();
-
-        flareLayer = new Group();
-        flareLayer.setBlendMode(BlendMode.Add());
-        flareLayer.createBackBuffer();
 
         backLayer = new Group();
         backLayer.add(new ImageSprite("background.png", 0, 0));
@@ -86,6 +89,10 @@ public class Level extends Scene2D {
         player.moveTo(320, 240, 0);
         itemLayer = new Group();
         itemLayer.add(player);
+
+        flaresLayer = new Group();
+        flaresLayer.setBlendMode(BlendMode.Add());
+        flaresLayer.createBackBuffer();
         
         uiLayer = new Group();
         uiLayer.add(new Meter(player, flashlight));
@@ -97,7 +104,7 @@ public class Level extends Scene2D {
         addLayer(backLayer);
         addLayer(itemLayer);
         addLayer(maskLayer);
-        addLayer(flareLayer);
+        addLayer(flaresLayer);
         addLayer(uiLayer);
         
         //// TODO: Not working
@@ -105,10 +112,51 @@ public class Level extends Scene2D {
         //sound.play();
     }
 
+    public Group getMaskLayer() { return maskLayer; }
+
     private void addCrawler() {
         // TODO: Make it pop out of the edges only
         Crawler c = new Crawler(player, CoreMath.rand(0, 640), CoreMath.rand(0, 480));
         itemLayer.add(c);
+    }
+
+    public void addFlare(int x, int y) {
+        // TODO: Timer to stop player from spamming
+        if (flareCount < flareAllowed) {
+            debug("level is launching flare to " + x + ", " + y);
+            Flare f = new Flare(this, x, y);
+            flares.add(f);
+            flaresLayer.add(f);
+            flareCount += flareDelay;
+        } else {
+            switch (CoreMath.rand(0,6)) {
+                case 0: messager.addMessage("I can't keep up with you, kid!",3000);
+                        break;
+                case 1: messager.addMessage("You're giving epilepsy up here...",2000);
+                        break;
+                case 2: messager.addMessage("Think I'm getting epilepsy up here...",3000);
+                        break;
+                case 3: messager.addMessage("We've got to conserve flares, not burn them all!",3500);
+                        break;
+                case 4: messager.addMessage("You're a pyro, gimme a moment here to light another one.", 4000);
+                        break;
+                case 5: messager.addMessage("Hey, it's not like I've got a freakin' flare machine gun up here!", 4000);
+                        break;
+                case 6: messager.addMessage("Okay, Blinky McBlinkerson, I'm working on it.", 3500);
+                        break;
+                default: messager.addMessage("Sheesh, I'm on it!", 2000);
+            }
+        }
+    }
+
+    public void removeFlare(Flare f) {
+        if (flares.contains(f)) {
+            flares.remove(flares.indexOf(f));
+        }
+    }
+
+    public void debug(String s) {
+        if (Build.DEBUG) CoreSystem.print(s);
     }
     
     @Override
@@ -131,14 +179,52 @@ public class Level extends Scene2D {
             }
         }
 
+        flareCount -= elapsedTime;
+
         if (time > levelDuration) {
             player.resetTime();
             Stage.replaceScene(new LevelOverScene(player));
         }
 
-        if (Input.isDown(Input.KEY_F)) {
-            Flare f = new Flare(this, 320, 240);
-            flareLayer.add(f);
+        // random encouragement from the heli
+        if (messages.size() == 0 && CoreMath.rand(0.0, 1.0) > 0.98) {
+            if (levelDuration - time < 5000) {
+                switch (CoreMath.rand(0,6)) {
+                    case 0: messages.add("Nice work!");
+                            break;
+                    case 1: messages.add("Most excellent.");
+                            break;
+                    case 2: messages.add("Charge that light, here comes another swarm!");
+                            break;
+                    case 3: messages.add("Sorry kid, but there's even more coming over that hill.");
+                            break;
+                    case 4: messages.add("Phew! Nice.");
+                            break;
+                    case 5: messages.add("I'm sweatin' for you up here, kiddo.");
+                            break;
+                    case 6: messages.add("Man oh man.");
+                            break;
+                    default: break;
+                }
+            } else {
+                switch (CoreMath.rand(0,6)) {
+                    case 0: messages.add("Go kid, go! You're doin' it!");
+                            break;
+                    case 1: messages.add("Watch out!");
+                            break;
+                    case 2: messages.add("Excellent...");
+                            break;
+                    case 3: messages.add("Don't give up.");
+                            break;
+                    case 4: messages.add("What are those things doing?");
+                            break;
+                    case 5: messages.add("Yikes.");
+                            break;
+                    case 6: messages.add("Crud, it's getting windy up here.");
+                            break;
+                    default: break;
+                }
+            }
         }
     }
 }

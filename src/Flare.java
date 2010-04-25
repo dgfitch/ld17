@@ -1,13 +1,13 @@
 import pulpcore.sprite.Group;
 import pulpcore.sprite.ImageSprite;
 import pulpcore.sprite.Sprite;
+import pulpcore.image.BlendMode;
 import pulpcore.math.CoreMath;
 import pulpcore.animation.Easing;
 import pulpcore.animation.event.RemoveSpriteEvent;
 import pulpcore.animation.Timeline;
 import pulpcore.image.CoreImage;
 import pulpcore.image.AnimatedImage;
-import pulpcore.scene.Scene2D;
 import static pulpcore.image.Colors.*;
 
 public class Flare extends Group {
@@ -16,28 +16,31 @@ public class Flare extends Group {
     int duration = 6000;
     boolean fading = false;
     boolean lit = false;
-    AnimatedImage glowA;
     ImageSprite glow;
+    ImageSprite flare;
     CoreImage[] glows;
     CoreImage[] sparks;
-    Scene2D scene;
+    Level level;
 
-    public Flare(Scene2D sc, int sx, int sy) {
+    public Flare(Level l, int sx, int sy) {
         super();
-        scene = sc;
-        glowA = new AnimatedImage(CoreImage.load("flare_glow_test.png"), 4, 1);
-        glowA.setFrameDuration(50, true);
-        glowA.setHotspot(32,32);
-        glowA.start();
-        glow = new ImageSprite(glowA, 0, 0);
-        glow.alpha.set(0);
-        glow.width.set(200);
-        glow.height.set(200);
+        level = l;
+
+        CoreImage[] g = CoreImage.load("flare_glow.png").split(4, 1);
+        glow = new ImageSprite(g[0], sx, sy);
+        glow.setAnchor(0.5,0.5);
+        glow.scaleTo(200,200,0);
+        level.getMaskLayer().add(glow);
+
+        flare = new ImageSprite("flare.png", 0, 0);
+        flare.setAnchor(0.5,0.5);
+        flare.angle.set(CoreMath.rand(-2*Math.PI, 2*Math.PI));
+        add(flare);
+
         glows = CoreImage.load("spark_glow.png").split(4, 1);
         sparks = CoreImage.load("spark.png").split(4, 1);
         x.set(sx);
         y.set(sy);
-        add(glow);
     }
 
     public void addSpark() {
@@ -75,7 +78,7 @@ public class Flare extends Group {
         t.at(100).animateTo(s.alpha, 0, duration - 100, Easing.REGULAR_OUT);
         t.add(new RemoveSpriteEvent(this, s, duration));
 
-        scene.addTimeline(t);
+        level.addTimeline(t);
     }
 
     @Override
@@ -92,23 +95,25 @@ public class Flare extends Group {
         }
 
         if (fading) {
-            glow.alpha.set(CoreMath.rand(0, 2));
+            glow.alpha.set(CoreMath.rand(10, 50));
         } else if (lit) {
-            glow.alpha.set(CoreMath.rand(40, 60));
+            glow.alpha.set(CoreMath.rand(120, 250));
         } else {
-            glow.alpha.set(CoreMath.rand(0, 4));
+            glow.alpha.set(CoreMath.rand(50, 100));
         }
 
         if (time < duration - timeLit) {
             double r = CoreMath.rand(0.0,1.0);
-            if (r > 0.98)
+            if (r > 0.91)
                 addSpark();
-            if (time > timeLit && r > 0.96)
+            if (time > timeLit && r > 0.94)
                 addGlowSpark();
         }
 
-        if (time > duration + timeLit)
+        if (time > duration + timeLit) {
+            glow.removeFromParent();
             removeFromParent();
+        }
     }
 }
 

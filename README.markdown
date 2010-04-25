@@ -57,12 +57,15 @@
 
 20100425 14:32:28 - Tweaking some of the CPU load.
 
+20100425 15:44:13 - Flare clicky mechanics partly working.
+
 
 ## TODO
 
-FLARE mechanic
 Lock cursor to window?
 Fullscreen?
+
+make enemies take damage from flares
 
 Enemies:
   "Turrets"
@@ -77,6 +80,7 @@ Sounds
   Heli flare
   Heli chop
 Better background(s)
+BUG: enemies don't get unstunned when flashlight is off
 make enemies come (mostly?) from edges of screen
 enemy logic so they try to avoid light sources
 Tree/object/enemy shadows - overlay in mask layer? too expensive?
