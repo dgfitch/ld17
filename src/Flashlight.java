@@ -14,6 +14,9 @@ public class Flashlight extends Group {
     double flicker = 0.0;
     double switched = 0.0;
     double damage = 0.05;
+    double lastX = 320.0;
+    double lastY = 240.0;
+    double recharge = 0.02;
 
     public Flashlight(Group maskLayer) {
         super();
@@ -35,7 +38,6 @@ public class Flashlight extends Group {
         cursorCone.bindLocationTo(p);
     }
 
-    // TODO: haha I don't know how to do properties in java
     public double focusX() { return cursor.x.get(); }
     public double focusY() { return cursor.y.get(); }
     public boolean isOn() { return on; }
@@ -66,25 +68,29 @@ public class Flashlight extends Group {
             }
         }
 
+        cursor.setLocation(Input.getMouseX(), Input.getMouseY());
+        double cx = cursor.x.get();
+        double cy = cursor.y.get();
+
+        // charge flashlight if the mouse is moving a lot
+        double mouseMoved = Utils.dist(cx, cy, lastX, lastY);
+        power += elapsedTime * mouseMoved / 5000.0;
+
         if (!on) {
             if (power < 100.0) 
-                power += elapsedTime * 0.02;
-            // TODO: charge more if the mouse is moving a lot
+                power += elapsedTime * recharge;
         } else { // is on
             if (power > 0.0) 
                 power -= elapsedTime * 0.01;
 
-            // calculate distance
-            double distx = Math.abs(cursor.x.get() - player.x.get());
-            double disty = Math.abs(cursor.y.get() - player.y.get());
-            double distance = Math.sqrt(distx * distx + disty * disty);
+            // calculate distance from player
+            double distance = Utils.dist(cx, cy, player.x.get(), player.y.get());
             double beamWidth = 64.0 + distance / 3.0;
             double lensDilation = beamWidth * (1.0 + distance / 500.0);
             int lensIntensity = CoreMath.clamp((int)(500.0 - distance), 50, 255);
             cursorCone.scaleTo(beamWidth, distance, 0);
             cursor.scaleTo(beamWidth, lensDilation, 0);
 
-            cursor.setLocation(Input.getMouseX(), Input.getMouseY());
             double a = player.angle.get();
             cursorCone.angle.set(a);
             cursor.angle.set(a);
@@ -104,5 +110,9 @@ public class Flashlight extends Group {
                 flicker -= (elapsedTime * 0.2);
             }
         }
+
+        if (power > 100.0) power = 100.0;
+        lastX = cx;
+        lastY = cy;
     }
 }

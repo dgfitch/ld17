@@ -37,10 +37,15 @@
 
 20100425 02:24:35 - Man, there's a lot to do tomorrow. Going to have to prioritize!
 
+20100425 10:50:24 - Back at it, slowly working flashlight shaking code in.
+
+20100425 10:54:24 - I don't know what I was thinking, coding in mostly silence all this time! Rocking the last Buried Inside album.
+
 ## TODO
 
 Lock cursor to window?
 Fullscreen?
+Move distance to utility function?
 
 Enemies:
   "Turrets"
@@ -90,6 +95,3 @@ Pickups
     :set makeprg=ant\ -emacs
     :set sw=4
 
-Used this tutorial to get exuberant ctags working with Java base docs and Pulpcore API:
-
-http://blog.vinceliu.com/2007/08/vim-tips-for-java-2-using-exuberant.html
