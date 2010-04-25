@@ -67,9 +67,18 @@ public class LD17 extends Scene2D {
         //Sound sound = Sound.load("sound.wav");
         //sound.play();
     }
+
+    private void addCrawler() {
+        // TODO: Make it pop out of the edges only
+        Crawler c = new Crawler(player, CoreMath.rand(0, 640), CoreMath.rand(0, 480));
+        itemLayer.add(c);
+    }
     
     @Override
     public void update(int elapsedTime) {
         theme.y.animateTo(640 - Input.getMouseY(), 1000);
+        if (CoreMath.randChance(1)) {
+            addCrawler();
+        }
     }
 }
