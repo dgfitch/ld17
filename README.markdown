@@ -67,10 +67,12 @@
 
 20100425 17:46:41 - Adding a second enemy, still no smart AI. The stupid svg pipeline won't do my awesome TEETH!
 
+20100425 20:14:51 - Hah, went to dinner for a while and now have to super rush to get any sfx in. Music is complete, but untested!
+
+
+
 ## TODO
 
-
-move flare to item layer
 Enemies:
   "Turrets"
   Flyers?

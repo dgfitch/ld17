@@ -5,7 +5,6 @@ import pulpcore.math.CoreMath;
 import pulpcore.image.CoreFont;
 import pulpcore.image.BlendMode;
 import pulpcore.scene.Scene2D;
-import pulpcore.sound.Sound;
 import pulpcore.sprite.ImageSprite;
 import pulpcore.sprite.Label;
 import pulpcore.sprite.Sprite;
@@ -14,6 +13,8 @@ import pulpcore.sprite.Group;
 import pulpcore.Stage;
 import static pulpcore.image.Colors.*;
 import java.util.ArrayList;
+import pulpcore.sound.Sound;
+import pulpcore.sound.Playback;
 
 public class Level extends Scene2D {
     
@@ -31,6 +32,9 @@ public class Level extends Scene2D {
     Group uiLayer;
     ArrayList<String> messages;
 
+    Sound soundtrack;
+    Playback music;
+
     ArrayList<Flare> flares;
     int flareDelay = 9000;
     int flareCount = 0;
@@ -41,6 +45,8 @@ public class Level extends Scene2D {
 
     public Level(int n, Player p) {
         super();
+        soundtrack = Sound.load("level.ogg");
+        music = soundtrack.loop();
         player = p;
         player.setLevelNumber(n);
         levelNumber = n;
@@ -107,10 +113,6 @@ public class Level extends Scene2D {
         addLayer(maskLayer);
         addLayer(flaresLayer);
         addLayer(uiLayer);
-        
-        //// TODO: Not working
-        //Sound sound = Sound.load("sound.wav");
-        //sound.play();
     }
 
     public Group getMaskLayer() { return maskLayer; }
@@ -286,5 +288,10 @@ public class Level extends Scene2D {
                 }
             }
         }
+    }
+
+    @Override
+    public void unload() {
+        music.stop();
     }
 }

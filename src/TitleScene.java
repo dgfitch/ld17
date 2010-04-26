@@ -7,17 +7,23 @@ import pulpcore.sprite.ImageSprite;
 import pulpcore.sprite.Label;
 import pulpcore.sprite.Sprite;
 import pulpcore.Stage;
+import pulpcore.sound.Sound;
+import pulpcore.sound.Playback;
 
 public class TitleScene extends Scene2D {
     
     Button playButton;
     Button optionsButton;
     Group componentLayer;
+    Sound noise;
+    Playback music;
     
     @Override
     public void load() {
+        noise = Sound.load("menu.ogg");
+        music = noise.loop();
         
-        Label title = new Label(CoreFont.load("hello.font.png"), "Crowned in Doubt", 320, 240);
+        Label title = new Label(CoreFont.load("hello.font.png"), "Crowned in Doubt", 320, 170);
         title.setAnchor(0.5, 0.5);
         playButton = Button.createLabeledButton("Play", 320, 320);
         playButton.setAnchor(0.5, 0.5);
@@ -28,7 +34,7 @@ public class TitleScene extends Scene2D {
         componentLayer.add(playButton);
         componentLayer.add(optionsButton);
         
-        add(new ImageSprite("background.png", 0, 0));
+        add(new ImageSprite("title.png", 0, 0));
         add(title);
         addLayer(componentLayer);
     }
@@ -42,5 +48,10 @@ public class TitleScene extends Scene2D {
         else if (playButton.isClicked()) {
             Stage.setScene(new Level(1, new Player()));
         }
+    }
+
+    @Override 
+    public void unload() {
+        music.stop();
     }
 }

@@ -11,7 +11,8 @@ import static pulpcore.image.Colors.*;
 import pulpcore.Stage;
 import pulpcore.sound.Sound;
 
-public class GameOverScene extends Scene2D {
+// normally I wouldn't copy and paste, but LESS THAN AN HOUR TO GO!
+public class GameWinScene extends Scene2D {
     
     Button continueButton;
     Button quitButton;
@@ -20,18 +21,18 @@ public class GameOverScene extends Scene2D {
     Player player;
     Sound theme;
 
-    public GameOverScene(Player p) {
+    public GameWinScene(Player p) {
         super();
         finalScore = p.score;
         player = p;
-        theme = Sound.load("gameover.ogg");
+        theme = Sound.load("gamewin.ogg");
     }
     
     @Override
     public void load() {
         theme.play();
         
-        Label title = new Label(CoreFont.load("hello.font.png"), "GAME OVER", 320, 240);
+        Label title = new Label(CoreFont.load("hello.font.png"), "You survived!", 320, 240);
         title.setAnchor(0.5, 0.5);
         title.scale(title.width.get() / 2, title.height.get() / 2, title.width.get(), title.height.get(), 4000, pulpcore.animation.Easing.ELASTIC_IN);
         title.alpha.animate(0, 255, 10000);
@@ -42,9 +43,9 @@ public class GameOverScene extends Scene2D {
         scoreWas.scaleTo(scoreWas.width.get() / 2, scoreWas.height.get() / 2, 4000);
         scoreWas.alpha.animateTo(150, 10000);
 
-        continueButton = Button.createLabeledButton("OK", 320, 320);
+        continueButton = Button.createLabeledButton("Play Again", 320, 320);
         continueButton.setAnchor(0.5, 0.5);
-        quitButton = Button.createLabeledButton("Quit", 320, 370);
+        quitButton = Button.createLabeledButton("I'm a Winner", 320, 370);
         quitButton.setAnchor(0.5, 0.5);
         
         componentLayer = new Group();
@@ -60,11 +61,12 @@ public class GameOverScene extends Scene2D {
     @Override 
     public void update(int elapsedTime) {
         if (continueButton.isClicked()) {
-            Stage.setScene(new Level(player.getLevelNumber(), new Player()));
+            Stage.setScene(new Level(1, new Player()));
         }
         else if (quitButton.isClicked()) {
             Stage.setScene(new TitleScene());
         }
     }
 }
+
 
