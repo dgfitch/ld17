@@ -5,7 +5,7 @@ import pulpcore.sprite.ImageSprite;
 public class Centipede extends Enemy {
     public Centipede(Player p, Level l, int x, int y) {
         super(p, l, "enemy_centipede.png", x, y);
-        speed = CoreMath.rand(0.8, 1.0) + (p.getLevelNumber() / 10);
+        speed = CoreMath.rand(0.8, 1.4) + (p.getLevelNumber() / 7);
         health = p.getLevelNumber() + CoreMath.rand(2.0, 5.0);
         points = (int)health;
         int size = CoreMath.rand(20, 30);

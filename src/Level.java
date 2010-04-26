@@ -75,6 +75,7 @@ public class Level extends Scene2D {
         } else if (levelNumber == 5) {
             messages.add("Man, do I wish I had a ladder to drop down to you, kid...");
             messages.add("This is too brutal.");
+            messages.add("But I believe in you, little guy!");
         }
     }
     
@@ -83,7 +84,7 @@ public class Level extends Scene2D {
         setCursor(Input.CURSOR_OFF);
 
         maskLayer = new Group();
-        maskLayer.add(new FilledSprite(gray(18)));
+        maskLayer.add(new FilledSprite(gray(24)));
         flashlight = new Flashlight(this);
         player.setFlashlight(flashlight);
         maskLayer.add(flashlight);
@@ -162,12 +163,12 @@ public class Level extends Scene2D {
         // Timer is to stop player from spamming
         if (flareCount < flareAllowed) {
             debug("level is launching flare to " + x + ", " + y);
-            Sound sound = Sound.load("check.ogg");
-            sound.play();
+            //Sound sound = Sound.load("check.ogg");
+            //sound.play();
             Flare f = new Flare(this, x, y);
             flares.add(f);
             flaresLayer.add(f);
-            flareCount += flareDelay;
+            flareCount += flareDelay + flareCount;
         } else {
             switch (CoreMath.rand(0,9)) {
                 case 0: messager.addMessage("I can't keep up with you, kid!",3000);
@@ -230,10 +231,10 @@ public class Level extends Scene2D {
         boolean canSpawn = time > 20000 || levelNumber > 1;
         boolean shouldSpawn = canSpawn && time < levelDuration - 10000;
         if (shouldSpawn) {
-            if (CoreMath.randChance(1)) {
+            if (CoreMath.rand(0, 400) <= 1 + levelNumber) {
                 addCrawler();
             }
-            if (CoreMath.randChance(1)) {
+            if (CoreMath.rand(0, 400) <= 1 + levelNumber) {
                 addCentipede();
             }
         }
@@ -242,7 +243,11 @@ public class Level extends Scene2D {
 
         if (time > levelDuration) {
             player.resetTime();
-            Stage.replaceScene(new LevelOverScene(player));
+            if (levelNumber == 6) {
+                Stage.replaceScene(new GameWinScene(player));
+            } else {
+                Stage.replaceScene(new LevelOverScene(player));
+            }
         }
 
         if (Build.DEBUG && Input.isDown(Input.KEY_C)) addCrawler();
